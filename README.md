@@ -28,6 +28,4 @@ To carry out the architecture search run
 
 The output will  be a .csv file with the approximate Pareto Front and a .csv file with all the architectures trained during the optimization process. Select the architecture that best satisfies your requirements. For our experiments, we select the solution in the Pareto Front that minimizes the expected segmentation error. Note the validation performance in this search is not the final performance of the architecture. We only train for a maximum of 120 epochs during the optimization process. You must fully train the architecture from sctrach and the select the weights that miniimizes the validation error. 
 
-Due to the stochastic nature of the search, each run will end with different local minimum architectures.  
-
-
+Due to the stochastic nature of the search, each run will end with different local minimum architectures. To obtain the best results your must run the search with different seeds and select the architecture that has the best validation performance after fully training it.    
