@@ -15,8 +15,8 @@ In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework f
 # Datasets
 The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/), the hippocampus MR images from the Medical Segmentation Decathlon challenge is available [here](http://medicaldecathlon.com/), and the cardiac MR images from the ACDC dataset is available [here](https://www.creatis.insa-lyon.fr/Challenge/acdc/).   
 
-# Pretrained models
-To evaluate the pretrained models run: 
+# Train models
+To train and evaluate the models found in our work run:. You must first download the datasets from the links provided and locate them in the folder Dataset/Promise12 for the prostate segmentation, Dataset/ACDC for the cardiac segmentation, and Dataset/MSD for the hippocampus segmentation.    
 ## Promise 12 dataset
 
 ## ACDC dataset
