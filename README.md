@@ -31,7 +31,7 @@ Finally, the parameters used to perform the search are located in *main.py* in t
 # Train model
 To fully train an architecture run:
 ```
-nohup python3 main.py -search &  
+nohup python3 main.py -train &  
 ```
 The parameters used to perform the training are located in *main.py* in the *params["TrainParams"]* dictionary. The genotype for the best architecture found in our paper is used for default in the parameter *params["TrainParams"]["gene"]* (which is the parameter used to construct the EMONAS architecture). Hence, if you run the code as it is, you will fully train the architecture found with our experiments. **If you want to train another architecture you must change the parameter assigned to params["TrainParams"]["gene"]** . Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4]. These hyperparameters are the same as provided in the *pareto_solutions.csv* file after a search. Therefore, if you want to train an architecture according to your own search just copy the results from the *pareto_solutions.csv* file in the *main.py* file using the format provided before (ie:  params["TrainParams"]["gene"]=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4]).
 
