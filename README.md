@@ -1,5 +1,5 @@
 # EMONAS
-In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework for 3D medical image segmentation that optimizes both the segmentation accuracy and size of the network.  EMONAS-Net has two key components, a novel search space that considers the configuration of the micro- and macro-structure of the architecture and a Surrogate-assisted Multiobjective Evolutionary based Algorithm (SaMEA algorithm) that efficiently searches for the best hyperparameter values. The SaMEA algorithm uses the information collected during the initial generations of the evolutionary process to identify the most promising subproblems and select the best performing hyperparameter values during mutation to improve the convergence speed. Furthermore, a Random Forest surrogate model is incorporated to accelerate the fitness evaluation of the candidate architectures.
+In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework for 3D medical image segmentation that optimizes both the segmentation accuracy and size of the network.  EMONAS-Net has two key components, a novel search space that considers the configuration of the micro- and macro-structure of the architecture and a Surrogate-assisted Multiobjective Evolutionary based Algorithm (SaMEA algorithm) that efficiently searches for the best hyperparameter values. 
 
 ![alt text](https://github.com/mariabaldeon/EMONAS/blob/main/images/Fig.%201.%20Structure%20Search%20Space.jpg)
 
@@ -12,20 +12,34 @@ In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework f
 * Pygmo 2.16.1
 * Simpleitk 2.0.2
 
-# Datasets
-The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/), the hippocampus MR images from the Medical Segmentation Decathlon challenge is available [here](http://medicaldecathlon.com/), and the cardiac MR images from the ACDC dataset is available [here](https://www.creatis.insa-lyon.fr/Challenge/acdc/).   
-
-# Train models
-To train and evaluate the models found in our work run:. You must first download the datasets from the links provided and locate them in the folder Dataset/Promise12 for the prostate segmentation, Dataset/ACDC for the cardiac segmentation, and Dataset/MSD for the hippocampus segmentation.    
-## Promise 12 dataset
-
-## ACDC dataset
-
-## Hippocampus Medical Declathon dataset
-
+# Dataset
+The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, you must download the dataset and locate the images in the folder /Datasets/Promise12/Images for the code to run.
+The parameters used to preprocess the data are located in *main.py* in the params["DataManager"] dictionary. If you want to change any parameter, please do it here. 
 # Architecture search 
-To carry out the architecture search run
+To carry out the architecture search run:
+```
+nohup python3 main.py -search & 
+```
+The output will  be a: (1) a .csv file named *pareto_solutions.csv* that contains all the solutions that approximate Pareto Front. (2) *SearchLogs* folder with the logs of the search 
 
-The output will  be a .csv file with the approximate Pareto Front and a .csv file with all the architectures trained during the optimization process. Select the architecture that best satisfies your requirements. For our experiments, we select the solution in the Pareto Front that minimizes the expected segmentation error. Note the validation performance in this search is not the final performance of the architecture. We only train for a maximum of 120 epochs during the optimization process. You must fully train the architecture from sctrach and the select the weights that miniimizes the validation error. 
+* (1) In the *pareto_solutions.csv* file each pareto solution will be in row, where the solution in the first row minimizes the expected segmentation error and the solution in the last row minimizes the size of the network. Select the architecture that best satisfies your requirements. For our experiments, we select the solution that minimizes the expected segmentation error (1st row). For each solution, the csv file provides the optimized hyperparameters and training information: learning_rate= learning rate, node2_inp = input to node 2, node3_inp = input to node 3, node4_inp= input to node 4, ops1= convolutional operation for node 1, ops2= convolutional operation for node 2, ops3= convolutional operation for node 3, ops4= convolutional operation for node 4, num_cells= total number of encoder-decoder cells, num_filters= number of filters for the first cell, total_loss= expected segmentation error loss, val_loss= validation loss, train_loss= training loss, and param_count= number of trainable parameters in the architecture. Note the validation performance in this search is not the final performance of the architecture. We only train for a maximum of 120 epochs during the optimization process. You must fully train the architecture from sctrach (see the directions above to fully train) and the select the weights that minimizes the validation error. 
+* (2) In the *SearchLogs* folder the training loss and validation loss for each architecture trained during the search will be saved, plus the time it took to run each generation and the whole search. 
 
-Due to the stochastic nature of the search, each run will end with different local minimum architectures. To obtain the best results your must run the search with different seeds and select the architecture that has the best validation performance after fully training it.    
+Due to the stochastic nature of the search, each run will end with a different approximate Pareto Front. To obtain the best results your must run the search with different seeds and select the architecture that has the best validation performance after fully training it.  
+Finally, the parameters used to perform the search are located in *main.py* in the params["SearchParams"] dictionary. They are set according to the paper, if you want to change any parameter, please do it here.  
+
+# Train model
+To fully train an architecture run:
+```
+nohup python3 main.py -search &  
+```
+The parameters used to perform the training are located in *main.py* in the params["TrainParams"] dictionary. The genotype for the best architecture found in our paper is used for default in params["TrainParams"]["gene"]. Hence if you run the code as it is, you will fully train the architecture found with our experiments. If you want to train another architecture you must change this parameter. Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4]. These hyperparameters are the same as provided in the *pareto_solutions.csv* file after a search. Therefore, if you want to train an architecture according to your own search just copy the results from the *pareto_solutions.csv* file in the format provided before. 
+
+The ouput will be saved in a *TrainLogs* folder. There two types of outputs (1) the weights saved during the training process where the name has the following format weights.{epoch}--{validation_dice_coeff}.hdf5 and (2) logs with the loss, dice coefficent, accuracy, and recall on each epoch and the training time.  
+
+# Evaluate a model
+To fully train an architecture run:
+```
+nohup python3 main.py -evaluate &  
+```
+  
