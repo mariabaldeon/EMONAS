@@ -38,8 +38,11 @@ The parameters used to perform the training are located in *main.py* in the para
 The ouput will be saved in a *TrainLogs* folder. There two types of outputs (1) the weights saved during the training process where the name has the following format weights.{epoch}--{validation_dice_coeff}.hdf5 and (2) logs with the loss, dice coefficent, accuracy, and recall on each epoch and the training time.  
 
 # Evaluate a model
-To fully train an architecture run:
+To evaluate an architecture, first you must locate the weight you want to evaluate in the weights folder and run: 
 ```
 nohup python3 main.py -evaluate &  
 ```
-  
+You must use the weight with the highest validation dice score in the training phase. The parameters used to perform the evaluation are located in *main.py* in the params["EvalParams"]] dictionary. By default, the genotype for the best architecture found in our paper is used for default in params["EvalParams"]"]["gene"]. Hence if you run the code as it is, you will evaluate the architecture found with our experiments. If you want to evaluate another architecture you must change this parameter. Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4].    
+
+The ouput will be saved in a *EvalLogs* folder. There will be two .csv files as output (1) *CompiledMetrics.csv* will provide: val_dice= mean validation dice coefficient, val_hauss= mean validation hausdorff distance, val_MSD= mean validation mean surface distance, val_recall= mean validation recall  (2) 
+
