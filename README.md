@@ -46,3 +46,12 @@ The parameters used to perform the evaluation are located in *main.py* in the pa
 
 The ouput will be saved in the *EvalLogs* folder. There will be two .csv files as output (1) *CompiledMetrics.csv* will provide the mean evaluation metrics for the patients in the evaluation set. The metrics provided are val_dice= mean validation dice coefficient, val_hauss= mean validation hausdorff distance, val_MSD= mean validation mean surface distance, val_recall= mean validation recall  (2) *MetricsVal.csv* will provide the evalution metrics for each patient in the validation set. 
 
+# Citation
+If you use this code in your research, please cite our paper.
+
+@article{calisto2020neural,
+  title={Neural Architecture Search with an Efficient Multiobjective Evolutionary Framework},
+  author={Calisto, Maria Baldeon and Lai-Yuen, Susana},
+  journal={arXiv preprint arXiv:2011.04463},
+  year={2020}
+}
