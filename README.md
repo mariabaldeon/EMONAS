@@ -48,10 +48,11 @@ The ouput will be saved in the *EvalLogs* folder. There will be two .csv files a
 
 # Citation
 If you use this code in your research, please cite our paper.
-
+```
 @article{calisto2020neural,
   title={Neural Architecture Search with an Efficient Multiobjective Evolutionary Framework},
   author={Calisto, Maria Baldeon and Lai-Yuen, Susana},
   journal={arXiv preprint arXiv:2011.04463},
   year={2020}
 }
+```
