@@ -13,7 +13,7 @@ In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework f
 * Simpleitk 2.0.2
 
 # Dataset
-The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, you must download the dataset and locate the images in the folder /Datasets/Promise12/Images for the code to run.
+The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, **you must download the dataset and locate the images in the folder /Datasets/Promise12/Images for the code to run**.
 The parameters used to preprocess the data are located in *main.py* in the params["DataManager"] dictionary. If you want to change any parameter, please do it here. 
 # Architecture search 
 To carry out the architecture search run:
@@ -33,16 +33,16 @@ To fully train an architecture run:
 ```
 nohup python3 main.py -search &  
 ```
-The parameters used to perform the training are located in *main.py* in the params["TrainParams"] dictionary. The genotype for the best architecture found in our paper is used for default in params["TrainParams"]["gene"]. Hence if you run the code as it is, you will fully train the architecture found with our experiments. If you want to train another architecture you must change this parameter. Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4]. These hyperparameters are the same as provided in the *pareto_solutions.csv* file after a search. Therefore, if you want to train an architecture according to your own search just copy the results from the *pareto_solutions.csv* file in the format provided before. 
+The parameters used to perform the training are located in *main.py* in the *params["TrainParams"]* dictionary. The genotype for the best architecture found in our paper is used for default in the parameter *params["TrainParams"]["gene"]*. Hence, if you run the code as it is, you will fully train the architecture found with our experiments. **If you want to train another architecture you must change the params["TrainParams"]["gene"]** . Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4]. These hyperparameters are the same as provided in the *pareto_solutions.csv* file after a search. Therefore, if you want to train an architecture according to your own search just copy the results from the *pareto_solutions.csv* file in the *main.py* file using the format provided before (ie:  params["TrainParams"]["gene"]=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4]).
 
-The ouput will be saved in a *TrainLogs* folder. There two types of outputs (1) the weights saved during the training process where the name has the following format weights.{epoch}--{validation_dice_coeff}.hdf5 and (2) logs with the loss, dice coefficent, accuracy, and recall on each epoch and the training time.  
+The ouput will be saved in a *TrainLogs* folder. There two types of outputs (1) the weights saved during the training process where the name has the following format weights.{epoch}--{validation_dice_coeff}.hdf5 and (2) logs with the loss, dice coefficent, accuracy, and recall on each training epoch and the training time.  
 
 # Evaluate a model
-To evaluate an architecture, first you must locate the weight you want to evaluate in the weights folder and run: 
+To evaluate an architecture, first you **must locate the weight you want to evaluate in the *weights* folder and verify the params["EvalParams"]["gene"] is the same as the genotype you used to train the architecture**(explained below). Then run: 
 ```
 nohup python3 main.py -evaluate &  
 ```
-You must use the weight with the highest validation dice score in the training phase. The parameters used to perform the evaluation are located in *main.py* in the params["EvalParams"]] dictionary. By default, the genotype for the best architecture found in our paper is used for default in params["EvalParams"]"]["gene"]. Hence if you run the code as it is, you will evaluate the architecture found with our experiments. If you want to evaluate another architecture you must change this parameter. Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4].    
+The parameters used to perform the evaluation are located in *main.py* in the params["EvalParams"] dictionary. By default, the genotype for the best architecture found in our paper is assigned to params["EvalParams"]"]["gene"]. Hence, if you run the code as it is, you will evaluate the architecture found with our experiments. If you want to evaluate another architecture you must change this parameter. Specifically, we encode an architecture using a list with the following format: Genotype=[learning_rate,num_filters,num_cells, node2_in, node3_in, node4_in, ops_node1, ops_node2, ops_node3, ops_node4].    
 
-The ouput will be saved in a *EvalLogs* folder. There will be two .csv files as output (1) *CompiledMetrics.csv* will provide: val_dice= mean validation dice coefficient, val_hauss= mean validation hausdorff distance, val_MSD= mean validation mean surface distance, val_recall= mean validation recall  (2) 
+The ouput will be saved in the *EvalLogs* folder. There will be two .csv files as output (1) *CompiledMetrics.csv* will provide: val_dice= mean validation dice coefficient, val_hauss= mean validation hausdorff distance, val_MSD= mean validation mean surface distance, val_recall= mean validation recall  (2) *MetricsVal.csv* will provide the evalution metrics for each patient in the validation set. 
 
