@@ -13,7 +13,7 @@ In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework f
 * Simpleitk 2.0.2
 
 # Dataset
-The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, **you must download the dataset, rename the folder to *Images* and locate it in */Datasets/Promise12* for the code to run** (the path set by default for the image dataset is *Datasets/Promise12/Images)*.
+The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, **you must download the dataset, put all images in a folder named *Images* and locate it in */Datasets/Promise12* for the code to run** (the path set by default for the image dataset is *Datasets/Promise12/Images)*.
 The parameters used to preprocess the data are located in ```main.py``` in the ```params["DataManager"]``` dictionary. If you want to change any parameter, please do it here. 
 # Architecture search 
 To carry out the architecture search run:
