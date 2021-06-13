@@ -13,7 +13,7 @@ In this work, we present EMONAS-Net, an Efficient MultiObjective NAS framework f
 * Simpleitk 2.0.2
 
 # Dataset
-The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, **you must download the dataset and create a new folder named *Images* locate it in */Datasets/Promise12* for the code to run** (the path set by default for the image dataset is *Datasets/Promise12/Images)*.
+The prostate MR images from the PROMISE12 challenge is available [here](https://promise12.grand-challenge.org/). Firts, **you must download the dataset, rename the folder to *Images* and locate it in */Datasets/Promise12* for the code to run** (the path set by default for the image dataset is *Datasets/Promise12/Images)*.
 The parameters used to preprocess the data are located in ```main.py``` in the ```params["DataManager"]``` dictionary. If you want to change any parameter, please do it here. 
 # Architecture search 
 To carry out the architecture search run:
@@ -38,7 +38,7 @@ The parameters used to perform the training are located in ```main.py``` in the 
 The ouput will be saved in a *TrainLogs* folder. There two types of outputs (1) the weights saved during the training process where the name has the following format weights.{epoch}--{validation_dice_coeff}.hdf5 (the best weight is the one that has the highest validation_dice_coeff) and (2) logs with the loss, dice coefficent, accuracy, and recall on each training epoch and the training time.  
 
 # Evaluate a model
-To evaluate an architecture, first you **must create folder named *weights* and locate the weight you want to evaluate in the *weights* folder and verify the parameter assigned to ```params["EvalParams"]["gene"]``` is the same parameter you assigned to ```params["TrainParams"]["gene"]```*  when training the architecture**(explained below). Then run: 
+To evaluate an architecture, first you **must create folder named *weights* and locate the weight you want to evaluate in this folder, and verify the parameter assigned to ```params["EvalParams"]["gene"]``` is the same parameter you assigned to ```params["TrainParams"]["gene"]```*  when training the architecture**(explained below). Then run: 
 ```
 nohup python3 main.py -evaluate &  
 ```
