@@ -122,10 +122,6 @@ def get_EMONAS(input_list, ops_list, h, w, slices, channels, classes, nfilter, b
     stem=stem_cell(inp, ops_list, nfilter)
     first_block=frst_blck(stem,input_list, ops_list, nfilter)
 
-    if blocks==3:
-        down1=downsampling_block(first_block, input_list, ops_list, nfilter*2)
-        output= upsampling_block(first_block, down1, input_list, ops_list, nfilter)
-
     if blocks==5:
         down1=downsampling_block(first_block, input_list, ops_list, nfilter*2)
         down2=downsampling_block(down1, input_list, ops_list, nfilter*4)
@@ -156,6 +152,6 @@ def get_EMONAS(input_list, ops_list, h, w, slices, channels, classes, nfilter, b
 
 def prediction(kmodel, crpimg):
     imarr=np.array(crpimg).astype(np.float32)
-    imarr = np.expand_dims(imarr, axis=0) #Adds a new dimension in the 0 axis that is the batch
+    imarr = np.expand_dims(imarr, axis=0) 
 
     return kmodel.predict(imarr)
