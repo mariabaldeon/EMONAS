@@ -25,11 +25,7 @@ from Search.SurrogateRandomForest import PredictMeanStd
 from sklearn.metrics import mean_squared_error
 from numpy.random import seed
 seed(12)
-#from tensorflow import set_random_seed
-#set_random_seed(12)
 
-
-# In[11]:
 
 
 def dice_coef(y_true, y_pred):
