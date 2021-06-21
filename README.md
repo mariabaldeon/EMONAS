@@ -38,7 +38,7 @@ The parameters used to perform the training are located in ```main.py``` in the 
 The ouput will be saved in a *TrainLogs* folder. There two types of outputs (1) the weights saved during the training process where the name has the following format weights.{epoch}--{validation_dice_coeff}.hdf5 (the best weight is the one that has the highest validation_dice_coeff) and (2) logs with the loss, dice coefficent, accuracy, and recall on each training epoch and the training time.  
 
 # Evaluate a model
-To evaluate an architecture, first you **must create folder named *weights* and locate the weight you want to evaluate in this folder, and verify the parameter assigned to ```params["EvalParams"]["gene"]``` is the same parameter you assigned to ```params["TrainParams"]["gene"]```  when training the architecture**(explained below). Then run: 
+To evaluate an architecture, first you **must create a folder named *weights* and locate the weight you want to evaluate in this folder, and verify the parameter assigned to ```params["EvalParams"]["gene"]``` is the same parameter you assigned to ```params["TrainParams"]["gene"]```  when training the architecture**(explained below). Then run: 
 ```
 nohup python3 main.py -evaluate &  
 ```
