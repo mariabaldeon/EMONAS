@@ -49,10 +49,13 @@ The ouput will be saved in the *EvalLogs* folder. There will be two .csv files a
 # Citation
 If you use this code in your research, please cite our paper.
 ```
-@article{calisto2020neural,
-  title={Neural Architecture Search with an Efficient Multiobjective Evolutionary Framework},
-  author={Calisto, Maria Baldeon and Lai-Yuen, Susana},
-  journal={arXiv preprint arXiv:2011.04463},
-  year={2020}
+@article{calisto2021emonas,
+  title={EMONAS-Net: Efficient multiobjective neural architecture search using surrogate-assisted evolutionary algorithm for 3D medical image segmentation},
+  author={Calisto, Maria Baldeon and Lai-Yuen, Susana K},
+  journal={Artificial intelligence in medicine},
+  volume={119},
+  pages={102154},
+  year={2021},
+  publisher={Elsevier}
 }
 ```
